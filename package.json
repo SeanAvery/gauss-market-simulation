@@ -1,0 +1,26 @@
+{
+  "name": "gauss-market-simulation",
+  "version": "1.0.0",
+  "description": "Using gaussian probabilities to simulate a live double-auction market.",
+  "main": "simulation.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Market",
+    "Simulation",
+    "node",
+    "javasctipt",
+    "gaussian",
+    "gauss"
+  ],
+  "author": "Sean Francis",
+  "license": "ISC",
+  "dependencies": {
+    "babel-cli": "^6.24.0",
+    "babel-preset-es2015": "^6.24.0",
+    "babel-preset-stage-0": "^6.22.0",
+    "bluebird": "^3.5.0",
+    "gaussian": "^1.1.0"
+  }
+}
