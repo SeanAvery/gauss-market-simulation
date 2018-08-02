@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import SideNav from './SideNav'
 
 export default class Main extends Component {
   render() {
@@ -17,13 +18,7 @@ export default class Main extends Component {
 
 const TopNav = () => (
   <div style={styles.topNav}>
-    <h3>GUASS</h3>
-  </div>
-)
-
-const SideNav = () => (
-  <div style={styles.sideNav}>
-
+    <h3>GAUSS</h3>
   </div>
 )
 
@@ -44,12 +39,4 @@ const styles = {
     display: 'flex',
     alignItems: 'center'
   },
-  sideNav: {
-    width: 200,
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    backgroundColor: '#F5F5F5',
-    padding: 10
-  }
 }
