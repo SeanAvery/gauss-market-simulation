@@ -9,13 +9,14 @@ export default class Simulation {
   }
 
   startIpc = () => {
-    console.log('made it here')
     ipc.config.id = 'simulation'
     ipc.config.retry = 1000
     ipc.config.maxConnections = 1
 
     ipc.serveNet(() => {
-      ipc.server.on('message', (data, socket) => ipc.log('### received message', data))
+      ipc.server.on('message', (data, client) => {
+        this.client = client
+      })
       ipc.server.on('socket.disconnected', (data, socket) => console.log('### disconnected'))
     })
 
@@ -26,7 +27,8 @@ export default class Simulation {
   simulate = async () => {
     while (true) {
       this.price = await this.bellRandom(this.price, this.volatility)
-      this.ipc.server.emit({ price: this.price })
+      console.log('price', this.price)
+      this.ipc.server.emit(this.client, 'message', JSON.stringify({ price: this.price }))
       await delay(1000)
     }
   }

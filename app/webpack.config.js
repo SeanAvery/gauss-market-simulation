@@ -21,6 +21,10 @@ module.exports = {
               require('@babel/plugin-proposal-class-properties')]
           }
         }
+      },
+      {
+        test: /\.css$/,
+        use: [ 'style-loader', 'css-loader' ]
       }
     ]
   }

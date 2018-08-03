@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Button, TextField, MenuList, MenuItem } from '@material-ui/core'
 import { connect } from 'react-redux'
+import { socket } from '../actions/index'
 
 class SideNav extends Component {
   exp = {}
@@ -32,7 +33,8 @@ class SideNav extends Component {
   }
 
   startSimulation = () => {
-    console.log('hit server withh exp hyperparams')
+    console.log('hit server with exp hyperparams')
+    socket.sendMsg(this.exp)
   }
 
   render = () => (

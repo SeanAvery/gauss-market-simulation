@@ -12,9 +12,14 @@ export default class Socket {
     ipc.config.retry = 1000
 
     ipc.connectToNet('simulation', () => {
-      ipc.of.simulation.on('connect', () => ipc.log('### connected to simulation'))
+      ipc.of.simulation.on('connect', () => {
+        console.log('### connected to simulation server')
+        ipc.of.simulation.emit('message', '')
+      })
 
-      ipc.of.simulation.on('message', (data) => ipc.log('### received data', data))
+      ipc.of.simulation.on('message', (data) => {
+        this.client.send(data)
+      })
 
       ipc.of.simulation.on('disconnect', () => ipc.log('### disconnected from simulation'))
     })
@@ -22,10 +27,11 @@ export default class Socket {
 
 
   startWs = () => {
-    const ws = new Server({ host: 'localhost', port: this.params.port, server: true })
+    this.ws = new Server({ host: 'localhost', port: this.params.port, server: true })
 
-    ws.on('connection', (client) => {
+    this.ws.on('connection', (client) => {
       console.log('### connected to client')
+      this.client = client
 
       client.on('message', (data) => this.handleMsg(data))
 
@@ -45,11 +51,14 @@ export default class Socket {
     }
   }
 
+  startSimulationServer = () => {
+    this.simulation = new Simulation()
+    this.simulation.init({price: 10, volatility: 2 })
+    this.simulation.startIpc()
+  }
+
   startSimulation = () => {
-    const simulation = new Simulation()
-    simulation.init({price: 10, volatility: 2 })
-    simulation.startIpc()
-    simulation.simulate()
+    this.simulation.simulate()
     .then(() => console.log('### finished simulation'))
     .catch(err => console.log('### error in simulation', err))
   }
@@ -57,7 +66,9 @@ export default class Socket {
 
 
 const socket = new Socket()
+
 socket.init({host: 'localhost', port: 3344})
+socket.startSimulationServer()
 socket.startIpc()
 socket.startWs()
 // .then(() => console.log('### socket died'))
