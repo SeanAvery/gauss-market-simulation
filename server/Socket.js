@@ -1,24 +1,20 @@
-import WS from 'ws'
+import net from 'net'
+
 
 export default class Socket {
-  init = (params) => {
-    this.url = `ws://${params.host}:${params.port}`
-    console.log('this.url', this.url)
-  }
+  init = (params) => this.port = params.port
 
   start = () => {
-    this.ws = new WS(this.url)
+    const server = net.createServer(c => {
+      console.log('### connected to client')
 
-    this.ws.on('open', () => console.log('### ws server started'))
-    this.ws.on('message', async (msg) => await this.handleMsg(msg))
+      c.on('data', (msg) => console.log('### received data', msg))
+    })
+
+    server.listen(this.port, () => console.log('### server listening'))
   }
-
-  handleMsg = (msg) => console.log('### received message', msg)
 }
 
-
 const socket = new Socket()
-socket.init({host: 'localhost', port: 3344})
+socket.init({ port: 3344 })
 socket.start()
-// .then(() => console.log('### socket died'))
-// .catch((err) => console.log('socket error', err))
