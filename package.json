@@ -17,10 +17,18 @@
   "author": "Sean Francis",
   "license": "ISC",
   "dependencies": {
-    "babel-cli": "^6.24.0",
-    "babel-preset-es2015": "^6.24.0",
-    "babel-preset-stage-0": "^6.22.0",
+    "@babel/plugin-proposal-class-properties": "^7.0.0-beta.55",
+    "@babel/preset-env": "^7.0.0-beta.55",
+    "@babel/register": "^7.0.0-beta.55",
+    "async-delay": "^1.0.3",
     "bluebird": "^3.5.0",
-    "gaussian": "^1.1.0"
+    "gaussian": "^1.1.0",
+    "material-ui": "^0.20.1",
+    "node-ipc": "^9.1.1",
+    "ws": "^6.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0-beta.55",
+    "@babel/node": "^7.0.0-beta.55"
   }
 }
