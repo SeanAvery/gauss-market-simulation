@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
-import SideNav from './SideNav'
-import Price from './Price'
+import SideNav from './comps/SideNav'
+import Price from './comps/Price'
 import { socket } from './actions/index'
+import { Provider } from 'react-redux'
+import store from './store'
 
 export default class Main extends Component {
   componentDidMount = () => socket.start()
 
-  render() {
-    return (
+  render = () => (
+    <Provider store={store}>
       <div style={styles.mainWndw}>
         <div>
           <TopNav />
@@ -17,8 +19,8 @@ export default class Main extends Component {
           </div>
         </div>
       </div>
-    )
-  }
+    </Provider>
+  )
 }
 
 const TopNav = () => (

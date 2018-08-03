@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import '../node_modules/react-vis/dist/style.css';
+import '../../node_modules/react-vis/dist/style.css'
 import { XYPlot, LineSeries, XAxis, YAxis } from 'react-vis'
+import { connect } from 'react-redux'
 
-export default class Price extends Component {
+class Price extends Component {
   data = [
     {x: 0, y: 8},
     {x: 1, y: 5},
@@ -26,3 +27,7 @@ export default class Price extends Component {
     </div>
   )
 }
+
+const storeToProps = (store) => store.price
+
+export default connect (storeToProps)(Price)
