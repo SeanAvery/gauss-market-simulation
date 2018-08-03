@@ -1,7 +1,11 @@
 import React, { Component } from 'react'
 import SideNav from './SideNav'
+import Price from './Price'
+import { socket } from './actions/index'
 
 export default class Main extends Component {
+  componentDidMount = () => socket.start()
+
   render() {
     return (
       <div style={styles.mainWndw}>
@@ -9,6 +13,7 @@ export default class Main extends Component {
           <TopNav />
           <div style={{ display: 'flex', flexDirection: 'row' }}>
             <SideNav />
+            <Price />
           </div>
         </div>
       </div>
