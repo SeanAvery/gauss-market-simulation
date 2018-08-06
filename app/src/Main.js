@@ -1,13 +1,10 @@
 import React, { Component } from 'react'
 import SideNav from './comps/SideNav'
 import Price from './comps/Price'
-import { socket } from './actions/index'
 import { Provider } from 'react-redux'
 import store from './store'
 
 export default class Main extends Component {
-  componentDidMount = () => socket.start()
-
   render = () => (
     <Provider store={store}>
       <div style={styles.mainWndw}>

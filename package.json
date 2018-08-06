@@ -4,7 +4,8 @@
   "description": "Using gaussian probabilities to simulate a live double-auction market.",
   "main": "simulation.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npx babel-node server/Simulation && npx babel-node server/Socket.js && cd ../app && npm run wds"
   },
   "keywords": [
     "Market",
