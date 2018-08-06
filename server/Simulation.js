@@ -26,8 +26,9 @@ export default class Simulation {
 
   simulate = async () => {
     while (true) {
-      this.price = await this.bellRandom(this.price, this.volatility)
-      console.log('price', this.price)
+      const price = await this.bellRandom(this.price, this.volatility)
+      if (price < 0) price = 0
+      this.price = price
       this.ipc.server.emit(this.client, 'message', JSON.stringify({ price: this.price }))
       await delay(1000)
     }
